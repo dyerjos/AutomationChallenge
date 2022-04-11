@@ -11,6 +11,7 @@ laser-program-generator = "laser_program_generator.main:app"
 [tool.poetry.dependencies]
 python = "^3.10"
 typer = {extras = ["all"], version = "^0.4.1"}
+black = "^22.3.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
