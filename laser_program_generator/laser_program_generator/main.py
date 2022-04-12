@@ -12,7 +12,18 @@ def main():
 
 
 @app.command()
-def generate_program(pattern: str):
+# def generate_program(pattern: str):
+# TODO: remove default when done testing
+def generate_program(
+    pattern: str = typer.Argument(
+        """
+    X....
+    .XX..
+    ..XX.
+    ....X
+        """
+    ),
+):
     """
     Given a desired output pattern as a string, this command generates a program to be executed by the laser cutter
     """
@@ -21,6 +32,7 @@ def generate_program(pattern: str):
     # * function should also make sure that each row and column has the same number of elements
     # * exit early if not valid input
     # * might as well determine grid dimensions here as well
+    validate_input(pattern)
 
     typer.echo("Welcome!\n")
     typer.echo(
@@ -38,7 +50,18 @@ def generate_program(pattern: str):
     pattern_confirmed = typer.confirm("Is this your desired pattern?\n")
     if not pattern_confirmed:
         typer.echo("Aborting due to unconfirmed output pattern")
-        raise typer.Abort()
+        raise typer.Exit(code=1)
 
     # * function to parse the pattern string
     # * this function will determin cut mark coordinates and store them
+
+    typer.echo("program exiting without errors")
+    raise typer.Exit()
+
+
+#  ======== helper functions ===========================
+
+
+def validate_input(pattern):
+    print("validating input")
+    # if pattern
