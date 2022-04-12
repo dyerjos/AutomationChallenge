@@ -10,7 +10,6 @@
   <p align="center">
     A program-generator for a primitive (and fictional) laser cutter machine
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
     <br />
     <br />
   </p>
@@ -145,7 +144,7 @@ _Below is an example of how you can instruct your audience on installing and set
 
 Joshua Dyer - dyerjo@mail.gvsu.edu
 
-Private Project Link: [https://github.com/dyerjos/AutomationChallenge](https://github.com/dyerjos/AutomationChallenge)
+Private Project Link: [https://github.com/dyerjos/AutomationChallenge/laser_program_generator/](https://github.com/dyerjos/AutomationChallenge/laser_program_generator/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
