@@ -30,7 +30,7 @@ def generate_program(
     cleaned_pattern = pattern.strip().replace(" ", "").casefold().upper()
     pattern_substrings = cleaned_pattern.split("\n")
 
-    validate_input(cleaned_pattern)
+    validate_input(cleaned_pattern, pattern_substrings)
 
     # typer.echo("Welcome!\n")
     # typer.echo(
@@ -60,7 +60,7 @@ def generate_program(
 #  ======== helper functions ===========================
 
 
-def validate_input(pattern):
+def validate_input(cleaned_pattern, pattern_substrings):
     validate_characters(cleaned_pattern)
     validate_grid(pattern_substrings)
 
@@ -73,9 +73,10 @@ def validate_characters(cleaned_pattern):
         typer.echo(f"The following invalid characters were found: {invalid_char}")
         typer.echo("Now aborting. Please try again without invalid characters")
         raise typer.Exit(code=1)
+    typer.echo("characters in input are valid")
 
 
-def validate_and_prep_grid(pattern_substrings):
+def validate_grid(pattern_substrings):
     row_count = 0
     expected_columns = None
     for line in pattern_substrings:
@@ -90,4 +91,4 @@ def validate_and_prep_grid(pattern_substrings):
             )
             raise typer.Exit(code=1)
 
-    typer.echo(f"grid is {expected_columns}x{row_count}")
+    typer.echo(f"grid is valid {expected_columns}x{row_count} grid")
