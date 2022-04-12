@@ -111,10 +111,9 @@ _Below is an example of how you can instruct your audience on installing and set
 - [x] Setup Typer
 - [x] Add Black for code formatting and Poetry for version control
 - [x] Initial README work
-- [ ] Start drafting possible approaches to the challenge
-- [ ] Add Flow Chart
+- [x] Start drafting possible approaches to the challenge
 - [ ] Setup some simple tests against provided test cases
-- [ ] Psuedocode the program
+- [x] Psuedocode the program
 - [ ] Develop the program in Python
 - [ ] Develop extra tests against working program
 - [ ] Check:
@@ -128,6 +127,7 @@ _Below is an example of how you can instruct your audience on installing and set
     - [ ] SoC
     - [ ] SOLID
     - [ ] Zen of Python
+- [ ] Add Flow Chart
 - [ ] Finalize README
 - [ ] Submission:
     - [ ] Add David Montague (GitHub user dmontagu) to the repository
