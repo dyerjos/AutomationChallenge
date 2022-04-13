@@ -52,6 +52,9 @@ def generate_program(pattern: str):
 
 @app.command()
 def generate_blank_grid(rows: int, columns: int):
+    """
+    Given a row length and a column length, this command generates a blank grid as a string
+    """
     typer.echo(f"rows needed: {rows}")
     typer.echo(f"columns needed: {columns}")
     pattern_string = ""
