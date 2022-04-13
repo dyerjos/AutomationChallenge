@@ -113,7 +113,6 @@ def get_laser_instructions(cut_coordinates):
     laser_active = False
     target = None
     distance_to_target = None
-    neighboring_target = False  # might need this
 
     def ensure_laser_active(run_time, laser_active):
         if not laser_active:

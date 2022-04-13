@@ -3,7 +3,6 @@ from typer.testing import CliRunner
 from laser_program_generator.main import (
     app,
     get_cut_coordinates,
-    get_laser_instructions,
 )
 
 runner = CliRunner()
