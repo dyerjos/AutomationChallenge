@@ -50,6 +50,19 @@ def generate_program(pattern: str):
     raise typer.Exit()
 
 
+@app.command()
+def generate_blank_grid(rows: int, columns: int):
+    typer.echo(f"rows needed: {rows}")
+    typer.echo(f"columns needed: {columns}")
+    pattern_string = ""
+    for row in range(rows):
+        for col in range(columns):
+            pattern_string += "."
+        pattern_string += "\n"
+
+    typer.echo(pattern_string)
+
+
 #  ======== validation functions ===========================
 
 
