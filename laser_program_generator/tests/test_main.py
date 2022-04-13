@@ -20,3 +20,7 @@ def test_app():
     )
 
     assert result.exit_code == 0
+
+
+# TODO: test all functions of main.py
+# TODO: test generate_program() against the 3 provided test cases
