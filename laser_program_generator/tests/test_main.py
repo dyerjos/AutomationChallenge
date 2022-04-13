@@ -89,3 +89,11 @@ def test_input_validation():
     )
     assert result.exit_code == 1
     assert "The following invalid characters were found:" in result.stdout
+
+
+def test_grid_validation():
+    result = runner.invoke(
+        app, ["generate-program", pattern_with_invalid_grid["pattern"]], input="y"
+    )
+    assert result.exit_code == 1
+    assert "first row of grid has 9 columns but this row only has 2" in result.stdout
