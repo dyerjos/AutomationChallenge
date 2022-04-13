@@ -24,7 +24,7 @@ def generate_program(pattern: str):
 
     typer.echo("Welcome!\n")
     typer.echo(
-        "This program accepts a desired pattern as a string\n"
+        "This program accepts a pattern as a string\n"
         "Input Example:\n"
         """
         ..XXX..
@@ -35,7 +35,7 @@ def generate_program(pattern: str):
 
     typer.echo(f"You provided the following pattern:\n {pattern}")
 
-    pattern_confirmed = typer.confirm("Is this your desired pattern?\n")
+    pattern_confirmed = typer.confirm("Is this pattern correct?\n")
     if not pattern_confirmed:
         typer.echo("Aborting due to unconfirmed output pattern")
         raise typer.Exit(code=1)
