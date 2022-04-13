@@ -1,6 +1,10 @@
 from typer.testing import CliRunner
 
-from laser_program_generator.main import app
+from laser_program_generator.main import (
+    app,
+    get_cut_coordinates,
+    get_laser_instructions,
+)
 
 runner = CliRunner()
 
@@ -12,6 +16,19 @@ test_case_one = {
     ..XXX..
     """,
     "ideal_runtime": 21.952,
+    "pattern_substrings": ["..XXX..", "XX...XX", "..XXX.."],
+    "cut_coordinates": [
+        [2.0, 0.0],
+        [3.0, 0.0],
+        [4.0, 0.0],
+        [0.0, 1.0],
+        [1.0, 1.0],
+        [5.0, 1.0],
+        [6.0, 1.0],
+        [2.0, 2.0],
+        [3.0, 2.0],
+        [4.0, 2.0],
+    ],
 }
 test_case_two = {
     "pattern": """
@@ -97,3 +114,10 @@ def test_grid_validation():
     )
     assert result.exit_code == 1
     assert "first row of grid has 9 columns but this row only has 2" in result.stdout
+
+
+def test_get_cut_coordinates():
+    assert (
+        get_cut_coordinates(test_case_one["pattern_substrings"])
+        == test_case_one["cut_coordinates"]
+    )
