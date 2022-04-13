@@ -15,17 +15,7 @@ def main():
 @app.command()
 # def generate_program(pattern: str):
 # TODO: remove default when done testing
-def generate_program(
-    pattern: str = typer.Argument(
-        """
-    ......XXX
-    ........X
-    X...X...X
-    X........
-    XXX......
-    """
-    ),
-):
+def generate_program(pattern: str):
     """
     Given a desired output pattern as a string, this command generates a program to be executed by the laser cutter
     """
