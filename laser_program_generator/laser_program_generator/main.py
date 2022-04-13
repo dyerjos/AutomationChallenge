@@ -18,10 +18,11 @@ def main():
 def generate_program(
     pattern: str = typer.Argument(
         """
-    X....
-    .XX..
-    ..XX.
-    ....X
+    ......XXX
+    ........X
+    X...X...X
+    X........
+    XXX......
     """
     ),
 ):
@@ -33,29 +34,29 @@ def generate_program(
 
     validate_input(cleaned_pattern, pattern_substrings)
 
-    # typer.echo("Welcome!\n")
-    # typer.echo(
-    #     "This program accepts a desired pattern as a string\n"
-    #     "Input Example:\n"
-    #     """
-    #     ..XXX..
-    #     XX...XX
-    #     ..XXX..
-    #     \n"""
-    # )
+    typer.echo("Welcome!\n")
+    typer.echo(
+        "This program accepts a desired pattern as a string\n"
+        "Input Example:\n"
+        """
+        ..XXX..
+        XX...XX
+        ..XXX..
+        \n"""
+    )
 
-    # typer.echo(f"You provided the following pattern:\n {pattern}")
+    typer.echo(f"You provided the following pattern:\n {pattern}")
 
-    # pattern_confirmed = typer.confirm("Is this your desired pattern?\n")
-    # if not pattern_confirmed:
-    #     typer.echo("Aborting due to unconfirmed output pattern")
-    #     raise typer.Exit(code=1)
+    pattern_confirmed = typer.confirm("Is this your desired pattern?\n")
+    if not pattern_confirmed:
+        typer.echo("Aborting due to unconfirmed output pattern")
+        raise typer.Exit(code=1)
 
     cut_coordinates = get_cut_coordinates(pattern_substrings)
 
     laser_instructions = get_laser_instructions(cut_coordinates)
 
-    # typer.echo("program exiting without errors")
+    typer.echo("program complete and exiting without errors")
     raise typer.Exit()
 
 
@@ -100,15 +101,15 @@ def validate_grid(pattern_substrings):
 
 def get_cut_coordinates(pattern_strings):
     cut_coordinates = []
-    x = 0.0
-    y = 0.0
+    x = 0.00
+    y = 0.00
     for row in pattern_strings:
         for char in row:
             if char == "X":
                 cut_coordinates.append([x, y])
-            x += 1.0
-        y += 1.0  # go to next row in grid
-        x = 0.0  # each row begins at 0 for x coordinate
+            x += 1.00
+        y += 1.00  # go to next row in grid
+        x = 0.00  # each row begins at 0 for x coordinate
 
     # typer.echo(f"final cut_coordinates: {cut_coordinates}")
     if not cut_coordinates:
@@ -127,6 +128,8 @@ def get_laser_instructions(cut_coordinates):
     target = None
     distance_to_target = None
     neighboring_target = False  # might need this
+
+    # TODO: double M01 when first point needs cut
 
     def ensure_laser_active(run_time, laser_active):
         if not laser_active:
@@ -150,10 +153,11 @@ def get_laser_instructions(cut_coordinates):
         target = None
         return target
 
-    def shut_off_sequence():
-        ensure_laser_inactive(run_time, laser_active)
+    def shut_off_sequence(run_time, laser_active):
+        run_time, laser_active = ensure_laser_inactive(run_time, laser_active)
         typer.echo("returning laser to (0.0, 0.0)")
         machine_instructions.append("G01 X0.00 Y0.00")
+        return run_time, laser_active
 
     def get_next_target(cut_coordinates, laser_coordinate):
         next_target = None
@@ -170,29 +174,35 @@ def get_laser_instructions(cut_coordinates):
                 best_euclidean_distance = euclidean_distance
         return next_target, best_euclidean_distance
 
-    # while cut_coordinates:
-    # * the following will run looped until completion:
+    def move_laser_to_target(distance_to_target, target, run_time, laser_active):
+        if distance_to_target > 1.0:
+            run_time, laser_active = ensure_laser_inactive(run_time, laser_active)
+        run_time += distance_to_target
+        new_laser_coordinate = target
+        machine_instructions.append(f"G01 X{target[0]}0 Y{target[1]}0")
+        return run_time, new_laser_coordinate, laser_active
 
-    if not cut_coordinates:
-        typer.echo("there are no more marks to make so initiating shutoff sequence")
-        shut_off_sequence()
-        typer.echo("Final Laser Program:")
-        for line in machine_instructions:
-            typer.echo(line)
-        typer.Exit()
+    while cut_coordinates:
+        if laser_coordinate in cut_coordinates:
+            typer.echo("current coordinate needs cut")
+            run_time, laser_active = ensure_laser_active(run_time, laser_active)
+            target = coordinate_is_cut(laser_coordinate)
+        else:
+            if not target:
+                target, distance_to_target = get_next_target(
+                    cut_coordinates, laser_coordinate
+                )
+                typer.echo(
+                    f"new target is: {target} with a distance of {distance_to_target}"
+                )
+            run_time, laser_coordinate, laser_active = move_laser_to_target(
+                distance_to_target, target, run_time, laser_active
+            )
 
-    if laser_coordinate in cut_coordinates:
-        typer.echo("current coordinate needs cut")
-        run_time, laser_active = ensure_laser_active(run_time, laser_active)
-        target = coordinate_is_cut(laser_coordinate)
-
-    if not target:
-        target, distance_to_target = get_next_target(cut_coordinates, laser_coordinate)
-        typer.echo(f"new target is: {target} with a distance of {distance_to_target}")
-
-    # move_laser_to_target()
-
-    typer.echo(f"machine instructions now: {machine_instructions}")
-    typer.echo(f"current run_time: {run_time}")
-    typer.echo(f"target: {target}")
-    typer.echo(f"new cut_coordinates: {cut_coordinates}")
+    typer.echo("there are no more marks to make so initiating shutoff sequence")
+    run_time, laser_active = shut_off_sequence(run_time, laser_active)
+    typer.echo(f"Runtime of program: {run_time}")
+    typer.echo("Final laser program:")
+    for line in machine_instructions:
+        typer.echo(line)
+    # typer.Exit()
