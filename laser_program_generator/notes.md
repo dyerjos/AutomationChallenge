@@ -22,7 +22,6 @@
 
 - setup test to confirm my program follows correct time tracking method
     - traveling straight from (0.0, 0.0) to (3.0, 0.0) takes 3.0 seconds
-        - manhattan distance of 3
     - traveling straight from (0.0, 0.0) to (3.0, 4.0) takes 5.0 seconds
     - travel time is purely Euclidean distance
 
@@ -78,17 +77,7 @@ math.dist(p, q):
     - We can determine cut mark coordinates
         - store these known cut mark coordinates
 
-3. Using starting position of laser cutter (0.0, 0.0) we will essentially be setting up an indexed priority queue of nodes with Dijkstra's algorithm or A* for order of target coordinates and when to toggle laser on/off
-    - if there are strict memory requirements, we can reduce the amount of memory by limiting number of nodes put on the priority queue
-        - use collections.deque?
-    - these instructions will be output including an instruction to make sure laser is toggled off at the end and returned to origin:
-        ```
-        M01
-        G01 X4.0 Y3.0
-        M01
-        G01 X0.0 Y0.0
-        ```
-        - for simplicity sake, maybe commands are an tuple of strings so that another program can iterate through the commands one by one and we can insure immutability
+3. Parse string to generate machine code
 
 ## Extra Ideas
 - [ ] Make a command to Generate a blank grid programmatically.
