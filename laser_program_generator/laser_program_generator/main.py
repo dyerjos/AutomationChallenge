@@ -1,5 +1,6 @@
 import typer
 import math
+import random
 
 
 app = typer.Typer()
@@ -64,6 +65,34 @@ def generate_blank_grid(rows: int, columns: int):
         pattern_string += "\n"
 
     typer.echo(pattern_string)
+    raise typer.Exit()
+
+
+@app.command()
+def generate_random_grid_pattern(rows: int, columns: int, cuts: int):
+    """
+    Given a row length and a column length, this command generates a blank grid as a string
+    """
+    typer.echo(f"rows needed: {rows}")
+    typer.echo(f"columns needed: {columns}")
+    typer.echo(f"cuts needed: {cuts}")
+    total_units = rows * columns
+    typer.echo(f"total_units: {total_units}\n")
+    if cuts > total_units:
+        typer.echo("There are more cuts than spaces in this grid. Now exiting.")
+        typer.Exit(code=1)
+    blank_spaces = total_units - cuts
+    char_pool = blank_spaces * ["."] + cuts * ["X"]
+    random.shuffle(char_pool)
+
+    pattern_string = ""
+    for row in range(rows):
+        for col in range(columns):
+            pattern_string += char_pool.pop()
+        pattern_string += "\n"
+
+    typer.echo(pattern_string)
+    raise typer.Exit()
 
 
 #  ======== validation functions ===========================
