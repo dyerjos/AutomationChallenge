@@ -1,24 +1,19 @@
 from typer.testing import CliRunner
 
-from laser_program_generator import main
+from laser_program_generator.main import app
 
 runner = CliRunner()
 
-# TODO: figure out why tests can't run (AttributeError: module 'laser_program_generator.main' has no attribute '_add_completion')
+
+test_pattern_one = """
+    ..XXX..
+    XX...XX
+    ..XXX..
+    """
 
 
 def test_app():
-    result = runner.invoke(
-        main,
-        [
-            """
-        ..XXX..
-        XX...XX
-        ..XXX..
-        """
-        ],
-    )
-
+    result = runner.invoke(app, ["generate-program", test_pattern_one], input="y")
     assert result.exit_code == 0
 
 
