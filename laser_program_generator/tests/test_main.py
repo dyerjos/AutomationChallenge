@@ -33,12 +33,24 @@ test_case_three = {
     """,
     "ideal_runtime": 29.903,
 }
-
-
-def test_unconfirmed_output():
-    result = runner.invoke(app, ["generate-program", "x"], input="n")
-    assert result.exit_code == 1
-    assert "Aborting due to unconfirmed output pattern" in result.stdout
+pattern_with_invalid_characters = {
+    "pattern": """
+    .m....XXX
+    ...9....X
+    X...O...X
+    X....3...
+    XXX......
+    """,
+}
+pattern_with_invalid_grid = {
+    "pattern": """
+    ......XXX
+    ..
+    X...X...X
+    X....
+    XXX......
+    """,
+}
 
 
 def test_pattern_one():
@@ -65,5 +77,15 @@ def test_pattern_three():
     assert "Runtime of program: 29.903" in result.stdout
 
 
-# TODO: test all functions of main.py
-# TODO: test generate_program() against the 3 provided test cases
+def test_unconfirmed_output():
+    result = runner.invoke(app, ["generate-program", "x"], input="n")
+    assert result.exit_code == 1
+    assert "Aborting due to unconfirmed output pattern" in result.stdout
+
+
+def test_input_validation():
+    result = runner.invoke(
+        app, ["generate-program", pattern_with_invalid_characters["pattern"]], input="y"
+    )
+    assert result.exit_code == 1
+    assert "The following invalid characters were found:" in result.stdout
