@@ -44,6 +44,9 @@ def generate_program(pattern: str):
 
     laser_instructions = get_laser_instructions(cut_coordinates)
 
+    for line in laser_instructions:
+        typer.echo(line)
+
     raise typer.Exit()
 
 
@@ -178,7 +181,6 @@ def get_laser_instructions(cut_coordinates):
             )
 
     run_time, laser_active = shut_off_sequence(run_time, laser_active)
-    typer.echo("Runtime of program: {:.3f}".format(run_time))
-    typer.echo("Final laser program:")
-    for line in machine_instructions:
-        typer.echo(line)
+    typer.echo("Runtime of program: {:.3f}\n".format(run_time))
+    typer.echo(machine_instructions)
+    return machine_instructions
