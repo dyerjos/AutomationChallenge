@@ -13,8 +13,6 @@ def main():
 
 
 @app.command()
-# def generate_program(pattern: str):
-# TODO: remove default when done testing
 def generate_program(pattern: str):
     """
     Given a desired output pattern as a string, this command generates a program to be executed by the laser cutter
@@ -46,7 +44,6 @@ def generate_program(pattern: str):
 
     laser_instructions = get_laser_instructions(cut_coordinates)
 
-    typer.echo("program complete and exiting without errors")
     raise typer.Exit()
 
 

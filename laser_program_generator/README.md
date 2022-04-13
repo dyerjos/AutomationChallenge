@@ -64,7 +64,6 @@
 ## Getting Started
 
 To get a local copy up and running follow these simple example steps.
-<!-- TODO -->
 
 ### Prerequisites
 
@@ -99,7 +98,19 @@ _Below is an example of how you can instruct your audience on installing and set
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-<!-- TODO: useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space -->
+  ```shell
+    laser-program-generator generate-program <your output pattern string>
+  ```
+
+  your string should look like this:
+
+  ```
+  """
+  ..XXX..
+  XX...XX
+  ..XXX..
+  """
+  ```
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -116,17 +127,16 @@ _Below is an example of how you can instruct your audience on installing and set
 - [x] Psuedocode the program
 - [x] Develop the program in Python
 - [ ] Develop extra tests against working program
-- [ ] Check:
-    - [ ] Is there a more efficient way to do this?
-    - [ ] Is this program about the same duration as the baseline solution for each test case?
-    - [ ] Is this program below the maximum allowed duration for each test case?
-    - [ ] Does this solution scale well for larger grid sizes?
-- [ ] Refactor code:
-    - [ ] DRY
+- [x] Check:
+    - [x] Is there a more efficient way to do this?
+    - [x] Is this program about the same duration as the baseline solution for each test case?
+    - [x] Is this program below the maximum allowed duration for each test case?
+    - [x] Does this solution scale well for larger grid sizes?
+- [x] Refactor code:
+    - [x] DRY
     - [x] KISS
-    - [ ] SoC
-    - [ ] SOLID
-    - [ ] Zen of Python
+    - [x] SoC
+    - [x] Zen of Python
 - [ ] Add Flow Chart
 - [ ] Finalize README
 - [ ] Submission:
