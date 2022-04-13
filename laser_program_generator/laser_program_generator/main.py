@@ -71,7 +71,7 @@ def generate_blank_grid(rows: int, columns: int):
 @app.command()
 def generate_random_grid_pattern(rows: int, columns: int, cuts: int):
     """
-    Given a row length and a column length, this command generates a blank grid as a string
+    Given a row length, a column length, and desired number of cuts, this command generates a random grid as a string
     """
     typer.echo(f"rows needed: {rows}")
     typer.echo(f"columns needed: {columns}")
