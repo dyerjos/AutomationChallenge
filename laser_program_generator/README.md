@@ -92,6 +92,12 @@ To get a local copy up and running follow these simple example steps.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
+  Want to see all commands? Run this:
+  ```shell
+  laser-program-generator --help
+  ```
+
+  To generate laser machine instructions. Run this:
   ```shell
   laser-program-generator generate-program <your output pattern string>
   ```
