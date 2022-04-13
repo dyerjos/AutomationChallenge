@@ -46,15 +46,11 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<!-- TODO [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 ### Built With
 
 * [Typer](https://typer.tiangolo.com/)
+* :heart:
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -75,9 +71,7 @@ To get a local copy up and running follow these simple example steps.
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
-1. Clone the repo
+1. Clone the repo or download the .whl file directly
    ```sh
    git clone https://github.com/dyerjos/AutomationChallenge.git
    ```
@@ -99,18 +93,16 @@ _Below is an example of how you can instruct your audience on installing and set
 ## Usage
 
   ```shell
-    laser-program-generator generate-program <your output pattern string>
+  $ laser-program-generator generate-program <your output pattern string>
   ```
 
   your string should look like this:
 
-  ```
-  """
-  ..XXX..
-  XX...XX
-  ..XXX..
-  """
-  ```
+    """
+    ..XXX..
+    XX...XX
+    ..XXX..
+    """
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -123,10 +115,8 @@ _Below is an example of how you can instruct your audience on installing and set
 - [x] Add Black for code formatting and Poetry for version control
 - [x] Initial README work
 - [x] Start drafting possible approaches to the challenge
-- [ ] Setup some simple tests against provided test cases
 - [x] Psuedocode the program
 - [x] Develop the program in Python
-- [ ] Develop extra tests against working program
 - [x] Check:
     - [x] Is there a more efficient way to do this?
     - [x] Is this program about the same duration as the baseline solution for each test case?
@@ -137,7 +127,7 @@ _Below is an example of how you can instruct your audience on installing and set
     - [x] KISS
     - [x] SoC
     - [x] Zen of Python
-- [ ] Add Flow Chart
+- [ ] Setup some tests
 - [ ] Finalize README
 - [ ] Submission:
     - [ ] Add David Montague (GitHub user dmontagu) to the repository
