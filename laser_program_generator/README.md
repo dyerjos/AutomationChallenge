@@ -114,7 +114,7 @@ _Below is an example of how you can instruct your audience on installing and set
 - [x] Start drafting possible approaches to the challenge
 - [ ] Setup some simple tests against provided test cases
 - [x] Psuedocode the program
-- [ ] Develop the program in Python
+- [x] Develop the program in Python
 - [ ] Develop extra tests against working program
 - [ ] Check:
     - [ ] Is there a more efficient way to do this?
@@ -123,7 +123,7 @@ _Below is an example of how you can instruct your audience on installing and set
     - [ ] Does this solution scale well for larger grid sizes?
 - [ ] Refactor code:
     - [ ] DRY
-    - [ ] KISS
+    - [x] KISS
     - [ ] SoC
     - [ ] SOLID
     - [ ] Zen of Python
