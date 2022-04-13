@@ -93,7 +93,7 @@ To get a local copy up and running follow these simple example steps.
 ## Usage
 
   ```shell
-  $ laser-program-generator generate-program <your output pattern string>
+  laser-program-generator generate-program <your output pattern string>
   ```
 
   your string should look like this:
@@ -103,6 +103,11 @@ To get a local copy up and running follow these simple example steps.
     XX...XX
     ..XXX..
     """
+
+  tests can be run from laser_program_directory by running
+  ```
+  pytest
+  ```
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
