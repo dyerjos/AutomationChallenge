@@ -11,7 +11,7 @@ test_case_one = {
     XX...XX
     ..XXX..
     """,
-    "run_time": 21.952,
+    "ideal_runtime": 21.952,
 }
 test_case_two = {
     "pattern": """
@@ -21,7 +21,7 @@ test_case_two = {
     ..XXXXX..
     ....X....
     """,
-    "run_time": 29.728,
+    "ideal_runtime": 29.728,
 }
 test_case_three = {
     "pattern": """
@@ -31,7 +31,7 @@ test_case_three = {
     X........
     XXX......
     """,
-    "run_time": 29.903,
+    "ideal_runtime": 29.903,
 }
 
 
@@ -39,6 +39,30 @@ def test_unconfirmed_output():
     result = runner.invoke(app, ["generate-program", "x"], input="n")
     assert result.exit_code == 1
     assert "Aborting due to unconfirmed output pattern" in result.stdout
+
+
+def test_pattern_one():
+    result = runner.invoke(
+        app, ["generate-program", test_case_one["pattern"]], input="y"
+    )
+    assert result.exit_code == 0
+    assert "Runtime of program: 22.893" in result.stdout
+
+
+def test_pattern_two():
+    result = runner.invoke(
+        app, ["generate-program", test_case_two["pattern"]], input="y"
+    )
+    assert result.exit_code == 0
+    assert "Runtime of program: 29.543" in result.stdout
+
+
+def test_pattern_three():
+    result = runner.invoke(
+        app, ["generate-program", test_case_three["pattern"]], input="y"
+    )
+    assert result.exit_code == 0
+    assert "Runtime of program: 29.903" in result.stdout
 
 
 # TODO: test all functions of main.py
