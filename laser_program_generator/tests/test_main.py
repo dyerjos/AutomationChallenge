@@ -3,6 +3,7 @@ from typer.testing import CliRunner
 from laser_program_generator.main import (
     app,
     get_cut_coordinates,
+    get_laser_instructions,
 )
 
 runner = CliRunner()
@@ -27,6 +28,27 @@ test_case_one = {
         [2.0, 2.0],
         [3.0, 2.0],
         [4.0, 2.0],
+    ],
+    "machine_instructions": [
+        "G01 X0.00 Y1.00",
+        "M01",
+        "G01 X1.00 Y1.00",
+        "M01",
+        "G01 X2.00 Y0.00",
+        "M01",
+        "G01 X3.00 Y0.00",
+        "G01 X4.00 Y0.00",
+        "M01",
+        "G01 X5.00 Y1.00",
+        "M01",
+        "G01 X6.00 Y1.00",
+        "M01",
+        "G01 X4.00 Y2.00",
+        "M01",
+        "G01 X3.00 Y2.00",
+        "G01 X2.00 Y2.00",
+        "M01",
+        "G01 X0.00 Y0.00",
     ],
 }
 test_case_two = {
@@ -119,4 +141,11 @@ def test_get_cut_coordinates():
     assert (
         get_cut_coordinates(test_case_one["pattern_substrings"])
         == test_case_one["cut_coordinates"]
+    )
+
+
+def test_laser_instructions():
+    assert (
+        get_laser_instructions(test_case_one["cut_coordinates"])
+        == test_case_one["machine_instructions"]
     )
