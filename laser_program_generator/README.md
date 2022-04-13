@@ -127,11 +127,11 @@ To get a local copy up and running follow these simple example steps.
     - [x] KISS
     - [x] SoC
     - [x] Zen of Python
-- [ ] Setup some tests
-- [ ] Finalize README
-- [ ] Submission:
-    - [ ] Add David Montague (GitHub user dmontagu) to the repository
-    - [ ] Email David at david@formlogic.com once your submission is ready and CC Adriana in the response (adriana@formlogic.com)
+- [X] Setup some tests
+- [X] Finalize README
+- [X] Submission:
+    - [X] Add David Montague (GitHub user dmontagu) to the repository
+    - [X] Email David at david@formlogic.com once your submission is ready and CC Adriana in the response (adriana@formlogic.com)
 
 
 
