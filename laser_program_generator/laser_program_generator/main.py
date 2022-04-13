@@ -129,8 +129,6 @@ def get_laser_instructions(cut_coordinates):
     distance_to_target = None
     neighboring_target = False  # might need this
 
-    # TODO: double M01 when first point needs cut
-
     def ensure_laser_active(run_time, laser_active):
         if not laser_active:
             typer.echo("turning laser on")
@@ -156,7 +154,11 @@ def get_laser_instructions(cut_coordinates):
     def shut_off_sequence(run_time, laser_active):
         run_time, laser_active = ensure_laser_inactive(run_time, laser_active)
         typer.echo("returning laser to (0.0, 0.0)")
-        machine_instructions.append("G01 X0.00 Y0.00")
+        laser_resting_coordinate = [0.0, 0.0]
+        distance_to_origin = math.dist(laser_coordinate, laser_resting_coordinate)
+        run_time, _, laser_active = move_laser_to_target(
+            distance_to_origin, laser_resting_coordinate, run_time, laser_active
+        )
         return run_time, laser_active
 
     def get_next_target(cut_coordinates, laser_coordinate):
@@ -169,7 +171,6 @@ def get_laser_instructions(cut_coordinates):
                 continue
             euclidean_distance = math.dist(laser_coordinate, cut_coordinate)
             if euclidean_distance < best_euclidean_distance:
-                # TODO: what if two coordinates have the same distance?
                 next_target = cut_coordinate
                 best_euclidean_distance = euclidean_distance
         return next_target, best_euclidean_distance
