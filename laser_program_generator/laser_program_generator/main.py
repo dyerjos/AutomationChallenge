@@ -21,9 +21,11 @@ def generate_program(pattern: str):
     cleaned_pattern = pattern.strip().replace(" ", "").casefold().upper()
     pattern_substrings = cleaned_pattern.split("\n")
 
-    validate_input(cleaned_pattern, pattern_substrings)
-
     typer.echo("Welcome!\n")
+
+    validate_input(cleaned_pattern)
+    validate_grid(pattern_substrings)
+
     typer.echo(
         "This program accepts a pattern as a string\n"
         "Input Example:\n"
@@ -98,12 +100,7 @@ def generate_random_grid_pattern(rows: int, columns: int, cuts: int):
 #  ======== validation functions ===========================
 
 
-def validate_input(cleaned_pattern, pattern_substrings):
-    validate_characters(cleaned_pattern)
-    validate_grid(pattern_substrings)
-
-
-def validate_characters(cleaned_pattern):
+def validate_input(cleaned_pattern):
     ALLOWED_INPUT_CHARACTERS = set({"\n", ".", "X"})
     unique_char = set(cleaned_pattern)
     invalid_char = unique_char.difference(ALLOWED_INPUT_CHARACTERS)
@@ -127,7 +124,6 @@ def validate_grid(pattern_substrings):
                 f"first row of grid has {expected_columns} columns but this row only has {columns_in_line}. This program requires all rows to have the same number of columns. Please fix your input. Now aborting"
             )
             raise typer.Exit(code=1)
-
     typer.echo(f"grid is {expected_columns}x{row_count}")
 
 
@@ -192,17 +188,13 @@ def get_laser_instructions(cut_coordinates):
 
     def get_next_target(cut_coordinates, laser_coordinate):
         next_target = None
-        best_euclidean_distance = None
+        best_distance_to_laser = None
         for cut_coordinate in cut_coordinates:
-            if not next_target:
+            distance_to_laser = math.dist(laser_coordinate, cut_coordinate)
+            if not next_target or distance_to_laser < best_distance_to_laser:
                 next_target = cut_coordinate
-                best_euclidean_distance = math.dist(laser_coordinate, cut_coordinate)
-                continue
-            euclidean_distance = math.dist(laser_coordinate, cut_coordinate)
-            if euclidean_distance < best_euclidean_distance:
-                next_target = cut_coordinate
-                best_euclidean_distance = euclidean_distance
-        return next_target, best_euclidean_distance
+                best_distance_to_laser = distance_to_laser
+        return next_target, best_distance_to_laser
 
     def move_laser_to_target(distance_to_target, target, run_time, laser_active):
         if distance_to_target > 1.0:
@@ -227,5 +219,4 @@ def get_laser_instructions(cut_coordinates):
 
     run_time, laser_active = shut_off_sequence(run_time, laser_active)
     typer.echo("Runtime of program: {:.3f}\n".format(run_time))
-    typer.echo(machine_instructions)
     return machine_instructions
