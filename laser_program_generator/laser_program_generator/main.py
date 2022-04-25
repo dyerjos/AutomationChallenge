@@ -1,7 +1,7 @@
-import typer
 import math
 import random
 
+import typer
 
 app = typer.Typer()
 
@@ -16,7 +16,8 @@ def main():
 @app.command()
 def generate_program(pattern: str):
     """
-    Given a desired output pattern as a string, this command generates a program to be executed by the laser cutter
+    Given a desired output pattern as a string,
+    this command generates a program to be executed by the laser cutter
     """
     cleaned_pattern = pattern.strip().replace(" ", "").casefold().upper()
     pattern_substrings = cleaned_pattern.split("\n")
@@ -73,7 +74,8 @@ def generate_blank_grid(rows: int, columns: int):
 @app.command()
 def generate_random_grid_pattern(rows: int, columns: int, cuts: int):
     """
-    Given a row length, a column length, and desired number of cuts, this command generates a random grid as a string
+    Given a row length, a column length and desired number of cuts,
+    this command generates a random grid as a string
     """
     typer.echo(f"rows needed: {rows}")
     typer.echo(f"columns needed: {columns}")
@@ -218,5 +220,5 @@ def get_laser_instructions(cut_coordinates):
             )
 
     run_time, laser_active = shut_off_sequence(run_time, laser_active)
-    typer.echo("Runtime of program: {:.3f}\n".format(run_time))
+    typer.echo(f"Runtime of program: {run_time:.3f}\n")
     return machine_instructions

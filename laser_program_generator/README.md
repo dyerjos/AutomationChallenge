@@ -114,6 +114,10 @@ To get a local copy up and running follow these simple example steps.
   ```
   pytest
   ```
+  If pytest is not yet installed on your machine run this first:
+    ```
+    pip install -U pytest
+    ```
 
   Want to make a new blank grid? Run this:
   ```
